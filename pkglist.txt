@@ -1,0 +1,9 @@
+tmux
+ripgrep
+alacritty
+ttf-firacode-nerd
+bat
+stow
+github-cli
+tree
+
