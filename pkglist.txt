@@ -6,4 +6,4 @@ bat
 stow
 github-cli
 tree
-
+starship
