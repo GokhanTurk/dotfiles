@@ -21,8 +21,7 @@
   "display": {
     "separator": "  ",
     "color": {
-      "keys": "magenta",
-      "title": "bright_magenta"
+      "keys": "magenta"
     },
     "size": {
       "ndigits": 0,
@@ -30,10 +29,6 @@
     }
   },
   "modules": [
-    {
-      "type": "title",
-      "format": "{user-name}@{host-name}"
-    },
     {
       "type": "custom",
       "format": "\u001b[35m╭─────────────────────────────────────────────────────╮"
