@@ -1,5 +1,7 @@
-for f in /usr/share/cachyos-fish-config/*
-    source $f
+if test -d /usr/share/cachyos-fish-config
+    for f in /usr/share/cachyos-fish-config/*
+        test -f $f; and source $f
+    end
 end
 
 # zoxide ve starship init çıktıları statik; her açılışta üretmek yerine
