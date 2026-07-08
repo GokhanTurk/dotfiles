@@ -1,0 +1,56 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Hız öncelikli config. format'ta olmayan modül HİÇ çalışmaz — dil/sürüm
+# modülleri (rust 361ms, package 5ms vb.) bilerek dışarıda bırakıldı.
+# OS'ten bağımsız: macOS ve CachyOS'ta aynı şekilde çalışır.
+scan_timeout = 10
+command_timeout = 250
+
+format = "$os$directory$git_branch$git_status$cmd_duration$line_break$character"
+right_format = "$status$time"
+
+# Fastfetch paletiyle uyumlu: magenta/cyan/mavi.
+
+[os]
+disabled = false
+style = "bright-blue"
+format = "[$symbol]($style)"
+
+[os.symbols]
+Macos = " "
+CachyOS = " "
+Arch = " "
+Linux = " "
+Windows = "󰍲 "
+
+[directory]
+style = "bold cyan"
+read_only = " 󰌾"
+
+[git_branch]
+symbol = " "
+style = "bold purple"
+
+[git_status]
+style = "bright-purple"
+
+[cmd_duration]
+min_time = 2000
+style = "bright-yellow"
+format = "took [$duration]($style) "
+
+[character]
+success_symbol = "[❯](bold purple)"
+error_symbol = "[❯](bold red)"
+
+[status]
+disabled = false
+symbol = " "
+style = "bold red"
+format = "[$symbol$status]($style) "
+
+[time]
+disabled = false
+time_format = "%H:%M"
+style = "bright-blue"
+format = "[󰥔 $time]($style)"
