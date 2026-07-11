@@ -7,3 +7,6 @@ stow
 github-cli
 tree
 starship
+keepassxc
+syncthing
+localsend
