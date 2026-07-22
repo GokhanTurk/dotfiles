@@ -11,3 +11,6 @@ keepassxc
 syncthing
 localsend
 zoxide
+remmina
+freerdp
+keyd
