@@ -14,3 +14,4 @@ zoxide
 remmina
 freerdp
 keyd
+plasma5-integration
