@@ -49,3 +49,16 @@ end
 if command -q bat
     abbr -a cat bat
 end
+
+if command -q tmux
+    abbr -a t tmux
+end
+
+if command -q netinston
+    abbr -a n netinston
+end
+
+if command -q gukab
+    abbr -a g gukab
+end
+
