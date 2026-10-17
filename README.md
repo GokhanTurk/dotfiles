@@ -29,9 +29,8 @@ curl -fsSL gokhanturk.com/dotfiles | sh                  # hepsi
 curl -fsSL gokhanturk.com/dotfiles | sh -s -- fish tmux  # sadece bunlar
 ```
 
-Arch, Debian ve Ubuntu'da çalışır. `git` ya da `stow` yoksa paket yöneticisiyle kurar,
-repoyu `~/dotfiles`'a klonlar, yerini alacağı dosyaları `~/.dotfiles-backup/`'a taşır ve stow'lar.
-Tekrar çalıştırırsan günceller.
+Arch, Debian ve Ubuntu. Eksikse `git` ve `stow`'u kurar, repoyu `~/dotfiles`'a klonlar,
+çakışan dosyaları `~/.dotfiles-backup/`'a taşır ve stow'lar.
 
 | Değişken       | Ne yapar                                              |
 | -------------- | ----------------------------------------------------- |
@@ -60,7 +59,7 @@ Her şey Catppuccin Mocha.
 
 ## Stow nasıl çalışıyor
 
-Her klasör bir paket. Paketin içi `$HOME`'un aynısı, stow da oraya symlink atar:
+Her klasör bir paket, içi `$HOME` ile aynı yapıda:
 
 ```
 ~/dotfiles/
@@ -79,14 +78,13 @@ stow -D fish       # kaldır
 
 ## Neovim
 
-Sadece Neovim'i kurmak için (dotfiles'ın geri kalanı olmadan):
+Sadece Neovim:
 
 ```sh
 curl -fsSL gokhanturk.com/nvim | sh
 ```
 
-Neovim 0.12+, plugin yöneticisi yok (dahili `vim.pack`), iki plugin var: catppuccin ve mini.nvim.
-Sürümler `nvim-pack-lock.json`'da sabit. İnternet ya da git yoksa dahili tema ve netrw ile açılır.
+Neovim 0.12+, `vim.pack`, catppuccin + mini.nvim. Plugin sürümleri `nvim-pack-lock.json`'da sabit.
 
 | Tuş            | Ne yapar                         |
 | -------------- | -------------------------------- |
@@ -99,7 +97,7 @@ Sürümler `nvim-pack-lock.json`'da sabit. İnternet ya da git yoksa dahili tema
 | `Ctrl-hjkl`    | Pencereler arası geç             |
 | `J / K`        | Seçimi taşı (görsel mod)         |
 
-`Space`'e basıp beklersen geri kalanı alt köşede çıkar.
+Tüm kısayolları görmek için `Space`'e basıp bekle, sağ alt köşede bir menü açılır.
 
 <div align="center">
 <br>
