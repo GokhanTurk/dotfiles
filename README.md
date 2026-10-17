@@ -90,7 +90,5 @@ Tüm kısayolları görmek için `Space`'e basıp bekle, sağ alt köşede bir m
 <br>
 
 <div align="center">
-  <a href="https://gokhanturk.com"><img src=".github/icon.svg" width="32" alt=">_"></a>
-  <br>
-  <a href="https://gokhanturk.com"><sub>gokhanturk.com</sub></a>
+  <a href="https://gokhanturk.com"><img src=".github/icon.svg" width="16" align="absmiddle" alt=">_"> gokhanturk.com</a>
 </div>
