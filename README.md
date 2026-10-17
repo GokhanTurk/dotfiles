@@ -1,14 +1,10 @@
 <div align="center">
 
-<img src=".github/demo.gif" alt="curl -fsSL gokhanturk.com/dotfiles | sh" width="760">
+<img src=".github/demo.gif" alt="GÖKHAN dotfiles" width="720">
 
 <br>
 
-![Arch](https://img.shields.io/badge/Arch-1e1e2e?style=for-the-badge&logo=archlinux&logoColor=89b4fa)
-![Debian](https://img.shields.io/badge/Debian-1e1e2e?style=for-the-badge&logo=debian&logoColor=f38ba8)
-![Ubuntu](https://img.shields.io/badge/Ubuntu-1e1e2e?style=for-the-badge&logo=ubuntu&logoColor=fab387)
-![Neovim](https://img.shields.io/badge/Neovim_0.12-1e1e2e?style=for-the-badge&logo=neovim&logoColor=a6e3a1)
-![Catppuccin](https://img.shields.io/badge/Catppuccin_Mocha-1e1e2e?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNjYmE2ZjciLz48L3N2Zz4=)
+![Arch](https://img.shields.io/badge/Arch-1e1e2e?style=for-the-badge&logo=archlinux&logoColor=89b4fa) ![Debian](https://img.shields.io/badge/Debian-1e1e2e?style=for-the-badge&logo=debian&logoColor=f38ba8) ![Ubuntu](https://img.shields.io/badge/Ubuntu-1e1e2e?style=for-the-badge&logo=ubuntu&logoColor=fab387) ![Neovim](https://img.shields.io/badge/Neovim_0.12-1e1e2e?style=for-the-badge&logo=neovim&logoColor=a6e3a1) ![Catppuccin](https://img.shields.io/badge/Catppuccin_Mocha-1e1e2e?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiNjYmE2ZjciLz48L3N2Zz4=)
 
 </div>
 
