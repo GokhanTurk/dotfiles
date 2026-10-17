@@ -8,25 +8,17 @@
 
 </div>
 
-```
-  ┌──────────────────────────────────────────────────────────────┐
-  │                                                              │
-  │   $ curl -fsSL gokhanturk.com/dotfiles | sh                  │
-  │                                                              │
-  │   klonla  ─▶  çakışanları yedekle  ─▶  stow  ─▶  hazır ✓     │
-  │                                                              │
-  └──────────────────────────────────────────────────────────────┘
-```
-
 ## Kurulum
 
 ```sh
-curl -fsSL gokhanturk.com/dotfiles | sh                  # hepsi
-curl -fsSL gokhanturk.com/dotfiles | sh -s -- fish tmux  # sadece bunlar
+curl -fsSL gokhanturk.com/dotfiles | sh
 ```
 
-Arch, Debian ve Ubuntu. Eksikse `git` ve `stow`'u kurar, repoyu `~/dotfiles`'a klonlar,
-çakışan dosyaları `~/.dotfiles-backup/`'a taşır ve stow'lar.
+Sadece bazı paketler:
+
+```sh
+curl -fsSL gokhanturk.com/dotfiles | sh -s -- fish tmux
+```
 
 | Değişken       | Ne yapar                                              |
 | -------------- | ----------------------------------------------------- |
@@ -95,7 +87,10 @@ Neovim 0.12+, `vim.pack`, catppuccin + mini.nvim. Plugin sürümleri `nvim-pack-
 
 Tüm kısayolları görmek için `Space`'e basıp bekle, sağ alt köşede bir menü açılır.
 
-<div align="center">
 <br>
-<sub>gokhanturk.com</sub>
+
+<div align="center">
+  <a href="https://gokhanturk.com"><img src=".github/icon.svg" width="32" alt=">_"></a>
+  <br>
+  <a href="https://gokhanturk.com"><sub>gokhanturk.com</sub></a>
 </div>
