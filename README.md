@@ -74,6 +74,30 @@ curl -fsSL gokhanturk.com/nvim | sh
 
 Neovim 0.12+, `vim.pack`, catppuccin + mini.nvim. Plugin sürümleri `nvim-pack-lock.json`'da sabit.
 
+### `v` kısayolu ve varsayılan editör
+
+Alias'lar shell'in interaktif dosyasına, `EDITOR` ise her oturumda yüklenen ortam dosyasına yazılır.
+Tekrar çalıştırmak güvenli, satır zaten varsa eklenmez.
+
+**bash** (alias → `~/.bash_aliases`, ortam → `~/.profile`)
+
+```sh
+grep -qxF "alias v='nvim'" ~/.bash_aliases 2>/dev/null || echo "alias v='nvim'" >> ~/.bash_aliases
+grep -qxF 'export EDITOR=nvim' ~/.profile 2>/dev/null || printf 'export EDITOR=nvim\nexport VISUAL=nvim\n' >> ~/.profile
+```
+
+**zsh** (alias → `~/.zshrc`, ortam → `~/.zshenv`)
+
+```sh
+grep -qxF "alias v='nvim'" ~/.zshrc 2>/dev/null || echo "alias v='nvim'" >> ~/.zshrc
+grep -qxF 'export EDITOR=nvim' ~/.zshenv 2>/dev/null || printf 'export EDITOR=nvim\nexport VISUAL=nvim\n' >> ~/.zshenv
+```
+
+**fish** için gerekmez, `fish` paketinde zaten var.
+
+Alias hemen geçerli olsun diye yeni bir shell aç. `EDITOR` için oturumu kapatıp tekrar gir.
+`~/.bash_aliases`'ı Debian/Ubuntu'nun varsayılan `~/.bashrc`'si yükler.
+
 | Tuş            | Ne yapar                         |
 | -------------- | -------------------------------- |
 | `Space Space`  | Dosya bul (`Ctrl-k` üst klasör)  |
