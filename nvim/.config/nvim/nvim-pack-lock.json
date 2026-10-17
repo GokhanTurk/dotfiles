@@ -1,0 +1,12 @@
+{
+  "plugins": {
+    "catppuccin": {
+      "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
+      "src": "https://github.com/catppuccin/nvim"
+    },
+    "mini.nvim": {
+      "rev": "295af26358628c8ba8f007ff6a7e0aec2f642a31",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    }
+  }
+}

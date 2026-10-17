@@ -39,7 +39,12 @@ fish_add_path -g ~/.local/bin
 abbr -a cls clear
 abbr -a ff fastfetch
 
-abbr -a v vim
+abbr -a v nvim
+
+if command -q nvim
+    set -gx EDITOR nvim
+    set -gx VISUAL nvim
+end
 
 if command -q eza
     abbr -a ls eza
