@@ -47,6 +47,7 @@ if command -q nvim
 end
 
 if command -q eza
+    set -gx EZA_ICONS_AUTO 1
     abbr -a ls eza
     abbr -a ll 'eza -l'
 end
