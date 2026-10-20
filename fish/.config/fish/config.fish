@@ -40,6 +40,8 @@ abbr -a cls clear
 abbr -a ff fastfetch
 
 abbr -a v nvim
+# sudo v dosya → sudo -e dosya (sudoedit: kendi nvim ayarlarınla)
+abbr -a --command sudo -- v -e
 
 if command -q nvim
     set -gx EDITOR nvim

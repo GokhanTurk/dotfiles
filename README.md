@@ -83,6 +83,7 @@ Tekrar çalıştırmak güvenli, satır zaten varsa eklenmez.
 
 ```sh
 grep -qxF "alias v='nvim'" ~/.bash_aliases 2>/dev/null || echo "alias v='nvim'" >> ~/.bash_aliases
+grep -qF 'sudo() {' ~/.bash_aliases 2>/dev/null || echo 'sudo() { if [ "$1" = v ]; then shift; command sudo -e "$@"; else command sudo "$@"; fi; }' >> ~/.bash_aliases
 grep -qxF 'export EDITOR=nvim' ~/.profile 2>/dev/null || printf 'export EDITOR=nvim\nexport VISUAL=nvim\n' >> ~/.profile
 ```
 
@@ -90,10 +91,13 @@ grep -qxF 'export EDITOR=nvim' ~/.profile 2>/dev/null || printf 'export EDITOR=n
 
 ```sh
 grep -qxF "alias v='nvim'" ~/.zshrc 2>/dev/null || echo "alias v='nvim'" >> ~/.zshrc
+grep -qF 'sudo() {' ~/.zshrc 2>/dev/null || echo 'sudo() { if [ "$1" = v ]; then shift; command sudo -e "$@"; else command sudo "$@"; fi; }' >> ~/.zshrc
 grep -qxF 'export EDITOR=nvim' ~/.zshenv 2>/dev/null || printf 'export EDITOR=nvim\nexport VISUAL=nvim\n' >> ~/.zshenv
 ```
 
 **fish** için gerekmez, `fish` paketinde zaten var.
+
+`sudo v dosya`, `sudo -e dosya` (sudoedit) olarak çalışır: dosya root yetkisiyle kaydedilir ama nvim kendi ayarlarınla açılır.
 
 Alias hemen geçerli olsun diye yeni bir shell aç. `EDITOR` için oturumu kapatıp tekrar gir.
 `~/.bash_aliases`'ı Debian/Ubuntu'nun varsayılan `~/.bashrc`'si yükler.
