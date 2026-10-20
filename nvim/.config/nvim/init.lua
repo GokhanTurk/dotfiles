@@ -90,6 +90,25 @@ vim.api.nvim_create_user_command('PackRetry', function()
   vim.notify('Neovim\'i yeniden aç, plugin kurulumu tekrar denenecek.')
 end, { desc = 'Plugin kurulumunu tekrar dene' })
 
+-- sudo'suz açılmış dosyayı sudo ile kaydet
+vim.api.nvim_create_user_command('SudoWrite', function()
+  local path = vim.fn.expand('%:p')
+  local text = table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), '\n')
+  if vim.bo.eol or vim.bo.fixeol then text = text .. '\n' end
+  local pw = ''
+  if vim.system({ 'sudo', '-n', 'true' }):wait().code ~= 0 then
+    pw = vim.fn.inputsecret('sudo şifresi: ') .. '\n'
+  end
+  local r = vim.system({ 'sudo', '-S', '-p', '', 'tee', path }, { stdin = pw .. text, stdout = false }):wait()
+  if r.code ~= 0 then
+    vim.notify('Kaydedilemedi: ' .. vim.trim(r.stderr or ''), vim.log.levels.ERROR)
+    return
+  end
+  vim.bo.modified = false
+  vim.bo.readonly = false
+  vim.notify('Kaydedildi (sudo): ' .. path)
+end, { desc = 'Dosyayı sudo ile kaydet' })
+
 vim.api.nvim_create_user_command('PackUpdate', function()
   vim.pack.update() -- onay: :w
 end, { desc = 'Plugin\'leri güncelle' })
@@ -101,6 +120,15 @@ if has_plugins then
     integrations = { mini = { enabled = true } },
   })
 end
+-- Satır numaraları okunaklı olsun (relativenumber ile zıplarken)
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    vim.api.nvim_set_hl(0, 'LineNr', { fg = '#a6adc8' })
+    vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#a6adc8' })
+    vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#a6adc8' })
+    vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#fab387', bold = true })
+  end,
+})
 -- plugin yoksa dahili catppuccin
 vim.cmd.colorscheme(has_plugins and 'catppuccin-mocha' or 'catppuccin')
 
