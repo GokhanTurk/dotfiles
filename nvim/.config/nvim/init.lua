@@ -251,6 +251,7 @@ end
 map('n', '<leader>w', '<cmd>write<cr>', { desc = 'Kaydet' })
 map('n', '<leader>q', '<cmd>quit<cr>', { desc = 'Pencereyi kapat' })
 map('n', '<Esc>', '<cmd>nohlsearch<cr>', { desc = 'Arama vurgusunu kaldır' })
+map('n', '<leader>d', function() return 'a' .. os.date('%F ') end, { expr = true, desc = 'Tarih ekle (YYYY-AA-GG)' })
 
 map('n', '<C-h>', '<C-w>h', { desc = 'Sol pencere' })
 map('n', '<C-j>', '<C-w>j', { desc = 'Alt pencere' })
