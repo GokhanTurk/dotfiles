@@ -1,0 +1,138 @@
+" ~/.vimrc — sunucular için sade Vim ayarı
+" Eklenti yok, dış araç yok (rg/fzf/git gerekmez). Tek dosya, kopyala-çalışsın.
+" Gereken: tam Vim (Debian/Ubuntu: `apt install vim` → vim.basic).
+" vim.tiny bu dosyanın çoğunu yok sayar.
+" Kısayollar nvim config'iyle aynı mantık: Space = leader.
+
+set nocompatible
+filetype plugin indent on
+syntax on
+
+" ---------------------------------------------------------------- görünüm
+set number relativenumber      " mutlak satır + göreli numara
+set cursorline
+set scrolloff=8 sidescrolloff=8
+set laststatus=2 showcmd
+set wildmenu wildmode=longest:full,full wildignorecase
+set wrap linebreak breakindent
+set list listchars=tab:»\ ,trail:·,nbsp:␣
+set shortmess+=I belloff=all
+set background=dark
+if has('termguicolors') && ($COLORTERM ==# 'truecolor' || $COLORTERM ==# '24bit')
+  set termguicolors
+endif
+" Sırayla dene: catppuccin (Vim 9.1+), habamax (9.0+), desert (her yerde)
+for s:cs in ['catppuccin', 'habamax', 'desert']
+  try
+    execute 'colorscheme' s:cs
+    break
+  catch
+  endtry
+endfor
+
+" Durum satırı: dosya [değişti] ... tür kodlama satır:sütun yüzde
+set statusline=\ %f\ %m%r%h%w%=%y\ %{&fenc!=''?&fenc:&enc}\ \ %l:%c\ \ %p%%\
+
+" ---------------------------------------------------------------- arama
+set incsearch hlsearch ignorecase smartcase
+
+" ---------------------------------------------------------------- girinti
+set expandtab tabstop=4 shiftwidth=4 softtabstop=4 shiftround autoindent
+augroup girinti
+  autocmd!
+  autocmd FileType yaml,json,html,xml,css,javascript,typescript,lua,ruby,nginx,caddyfile,vim,sh,bash
+        \ setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  autocmd FileType make,go setlocal noexpandtab
+augroup END
+
+" ---------------------------------------------------------------- davranış
+set encoding=utf-8
+set hidden autoread
+set backspace=indent,eol,start
+set splitbelow splitright
+set mouse=a
+if has('mouse_sgr') | set ttymouse=sgr | endif
+set ttimeout ttimeoutlen=50
+set history=1000 updatetime=300
+set nrformats-=octal formatoptions+=j
+
+" Swap ve kalıcı geri alma ~/.vim altında (çalışılan klasörü kirletmez)
+for s:d in ['swap', 'undo']
+  if !isdirectory(expand('~/.vim/' . s:d))
+    call mkdir(expand('~/.vim/' . s:d), 'p', 0700)
+  endif
+endfor
+set directory=~/.vim/swap//
+if has('persistent_undo') | set undofile undodir=~/.vim/undo// | endif
+
+" Dosyayı son kalınan satırda aç
+augroup son_konum
+  autocmd!
+  autocmd BufReadPost *
+        \ if line("'\"") >= 1 && line("'\"") <= line('$') && &ft !~# 'commit'
+        \ |   execute 'normal! g`"'
+        \ | endif
+augroup END
+
+" Dosya bulma: dahili :find, alt klasörler dahil
+set path=.,**
+set wildignore+=*/.git/*,*/node_modules/*,*/__pycache__/*,*.pyc,*.o,*.swp
+
+" Metin arama: dahili grep (rg yerine)
+set grepprg=grep\ -rnIH\ --exclude-dir=.git
+command! -nargs=+ Ara execute 'silent grep!' <q-args> '.' | copen | redraw!
+
+" netrw (dahili dosya gezgini)
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 25
+
+" ---------------------------------------------------------------- kısayollar
+let mapleader = ' '
+nnoremap <Space> <Nop>
+
+nnoremap <leader>w :write<CR>
+nnoremap <leader>q :quit<CR>
+nnoremap <leader>h :nohlsearch<CR>
+
+nnoremap <leader>e :Lexplore %:p:h<CR>
+nnoremap <leader>E :Lexplore<CR>
+nnoremap <leader><leader> :find<Space>
+nnoremap <leader>ff :find<Space>
+nnoremap <leader>fg :Ara<Space>
+nnoremap <leader>fr :browse oldfiles<CR>
+nnoremap <leader>fb :ls<CR>:buffer<Space>
+
+" Pencereler arası
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Görselde: satırları taşı, girintide seçimi koru
+xnoremap J :move '>+1<CR>gv=gv
+xnoremap K :move '<-2<CR>gv=gv
+xnoremap < <gv
+xnoremap > >gv
+
+nnoremap Y y$
+
+" Yetkisiz açılmış dosyayı sudo ile kaydet: :w!!
+cnoremap w!! write !sudo tee % >/dev/null
+
+" ---------------------------------------------------------------- SSH pano (OSC 52)
+" `y` ile kopyalanan metin kendi bilgisayarının panosuna gider
+" (Alacritty/Windows Terminal/iTerm destekler). Sunucuda tmux varsa
+" orada `set -g set-clipboard on` gerekir.
+if exists('##TextYankPost') && exists('*echoraw')
+  function! s:Osc52(event) abort
+    if a:event.operator !=# 'y' || a:event.regname !~# '^[+*"]\?$' | return | endif
+    let l:text = join(a:event.regcontents, "\n") . (a:event.regtype ==# 'V' ? "\n" : '')
+    let l:b64 = substitute(system('base64', l:text), '\n', '', 'g')
+    call echoraw("\e]52;c;" . l:b64 . "\x07")
+  endfunction
+  augroup osc52
+    autocmd!
+    autocmd TextYankPost * call s:Osc52(v:event)
+  augroup END
+endif

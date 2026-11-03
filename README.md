@@ -42,6 +42,7 @@ curl -fsSL gokhanturk.com/dotfiles | PKGS=1 WALLPAPERS=1 sh
 | `nvim`      | `~/.config/nvim`              | vim.pack + catppuccin + mini.nvim       |
 | `starship`  | `~/.config/starship.toml`     | Prompt                                  |
 | `tmux`      | `~/.config/tmux`              | Terminal çoklayıcı                      |
+| `vim`       | `~/.vimrc`                    | Sunucular için eklentisiz Vim, nvim ile aynı kısayollar |
 
 Her şey Catppuccin Mocha.
 
