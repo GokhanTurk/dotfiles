@@ -124,6 +124,17 @@ xnoremap > >gv
 
 nnoremap Y y$
 
+" Silme/değiştirme kopyalamasın: d c x s → kara delik ("_), yalnız y kopyalar.
+" Kesip taşımak gerekirse: Space d (satır için Space dd).
+for s:k in ['d', 'D', 'c', 'C', 'x', 'X', 's', 'S']
+  execute 'nnoremap' s:k '"_' . s:k
+  execute 'xnoremap' s:k '"_' . s:k
+endfor
+nnoremap <leader>d d
+xnoremap <leader>d d
+" Görselde seçimin üstüne yapıştırınca silinen metin kopyayı ezmesin
+xnoremap p P
+
 " Yetkisiz açılmış dosyayı sudo ile kaydet: :w!!
 cnoremap w!! write !sudo tee % >/dev/null
 
