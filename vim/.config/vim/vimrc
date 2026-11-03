@@ -1,7 +1,9 @@
-" ~/.vimrc — sunucular için sade Vim ayarı
+" ~/.config/vim/vimrc — sunucular için sade Vim ayarı
 " Eklenti yok, dış araç yok (rg/fzf/git gerekmez). Tek dosya, kopyala-çalışsın.
 " Gereken: tam Vim (Debian/Ubuntu: `apt install vim` → vim.basic).
 " vim.tiny bu dosyanın çoğunu yok sayar.
+" ~/.config/vim/vimrc yolunu Vim 9.1.0327+ okur (Ubuntu 24.10+, Debian 13+);
+" daha eski Vim'de aynı dosyayı ~/.vim/vimrc olarak koy.
 " Kısayollar nvim config'iyle aynı mantık: Space = leader.
 
 set nocompatible
@@ -56,14 +58,19 @@ set ttimeout ttimeoutlen=50
 set history=1000 updatetime=300
 set nrformats-=octal formatoptions+=j
 
-" Swap ve kalıcı geri alma ~/.vim altında (çalışılan klasörü kirletmez)
+" Swap ve kalıcı geri alma XDG state altında (çalışılan klasörü kirletmez)
+let s:state = (empty($XDG_STATE_HOME) ? expand('~/.local/state') : $XDG_STATE_HOME) . '/vim'
 for s:d in ['swap', 'undo']
-  if !isdirectory(expand('~/.vim/' . s:d))
-    call mkdir(expand('~/.vim/' . s:d), 'p', 0700)
+  if !isdirectory(s:state . '/' . s:d)
+    call mkdir(s:state . '/' . s:d, 'p', 0700)
   endif
 endfor
-set directory=~/.vim/swap//
-if has('persistent_undo') | set undofile undodir=~/.vim/undo// | endif
+let &directory = s:state . '/swap//'
+if has('persistent_undo')
+  set undofile
+  let &undodir = s:state . '/undo//'
+endif
+let g:netrw_home = s:state       " netrw geçmişi/yer imleri de buraya
 
 " Dosyayı son kalınan satırda aç
 augroup son_konum
